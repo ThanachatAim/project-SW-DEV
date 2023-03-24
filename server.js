@@ -4,6 +4,9 @@ const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
 
 //Route files
+const restaurants = require("./routes/restaurants");
+const reservations = require("./routes/reservations");
+const auth = require("./routes/auth");
 
 //Load env vars
 dotenv.config({ path: "./config/config.env" });
@@ -17,6 +20,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 //Mount routers
+app.use("/api/v1/restaurants", restaurants);
+app.use("/api/v1/reservations", reservations);
+app.use("/api/v1/auth", auth);
 
 // Connect to database
 connectDB();
