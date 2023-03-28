@@ -1,7 +1,9 @@
 "use client";
 import Navbar from "../components/navbar";
 import { MdTableRestaurant } from "react-icons/md";
-import { GrRestaurant } from "react-icons/gr";
+import { BiRestaurant } from "react-icons/bi";
+import { BsCardChecklist } from "react-icons/bs";
+import { AiFillEye } from "react-icons/ai";
 import { getUser } from "@/logic/user";
 
 export default function page() {
@@ -35,21 +37,43 @@ export default function page() {
           <h1 className="card-title">Nine: A Restaurant</h1>
           <h1 className="caard-title">Resevation System</h1>
           <p className="card-text">Please choose from an option below</p>
-          <div className="btn btn-secondary btn-md btn-block my-1">
-            <MdTableRestaurant className="me-2" size={30} />
-            <a onClick={() => homeHandler("/create/reservation")}>
-              Create New Restaurant Reservation
-            </a>
+          <div className="d-block">
+            <div
+              className="btn btn-secondary btn-md btn-block my-1"
+              style={{ width: "20rem" }}
+            >
+              <MdTableRestaurant className="me-2" size={30} />
+              <a onClick={() => homeHandler("/create/reservation")}>
+                Create New Restaurant Reservation
+              </a>
+            </div>
           </div>
-          <div className="btn btn-light d-block">
-            <button onClick={() => homeHandler()}>View My Reservation</button>
+          <div className="d-block">
+            <div
+              className="btn btn-secondary btn-md btn-block my-1"
+              style={{ width: "20rem" }}
+            >
+              <BsCardChecklist className="me-2" size={30} />
+              <a onClick={() => homeHandler()}>View My Reservation</a>
+            </div>
           </div>
-          <div className="btn btn-light d-block">
-            <GrRestaurant className="me-2" size={30} />
-            <button onClick={() => homeHandler()}>Create New Restaurant</button>
+          <div className="d-block">
+            <div
+              className="btn btn-secondary btn-md btn-block my-1"
+              style={{ width: "20rem" }}
+            >
+              <BiRestaurant className="me-2" size={30} />
+              <a onClick={() => homeHandler()}>Create New Restaurant</a>
+            </div>
           </div>
-          <div className="btn btn-light d-block my-1">
-            <button onClick={() => homeHandler()}>View My Restaurant</button>
+          <div className="d-block">
+            <div
+              className="btn btn-secondary btn-md btn-block my-1"
+              style={{ width: "20rem" }}
+            >
+              <AiFillEye className="me-2" size={30} />
+              <a onClick={() => homeHandler()}>View My Restaurant</a>
+            </div>
           </div>
         </div>
       </div>

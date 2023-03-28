@@ -2,6 +2,7 @@
 import { addReservation } from "@/logic/reservation";
 import { getRestaurants } from "@/logic/restaurant";
 import { useEffect, useState } from "react";
+import { IoRestaurantOutline } from "react-icons/io5";
 import Modal from "react-bootstrap/Modal";
 import Navbar from "../../../components/navbar";
 
@@ -79,12 +80,18 @@ export default function page() {
               style={{ width: "50rem" }}
               key={i}
             >
-              <h5 className="card-header">{value.name}</h5>
+              <h5 className="card-header">
+                <IoRestaurantOutline className="me-2" size={15} />
+                {value.name}
+              </h5>
               <div className="card-body pt-2 pb-0">
                 <p className="card-text">
-                  address : {value.address}, district : {value.district},
-                  province : {value.province}, postalcode : {value.postalcode},
-                  tel : {value.tel}, region : {value.region}
+                  address : {value.address} district : {value.district} province
+                  : {value.province}
+                </p>
+                <p className="card-text">
+                  postalcode : {value.postalcode} tel : {value.tel} region :{" "}
+                  {value.region}
                 </p>
               </div>
               <button
@@ -101,7 +108,7 @@ export default function page() {
       <nav aria-label="Page navigation example">
         <ul className="pagination justify-content-end">
           <li className="page-item">
-            <a className="page-link" onClick={() => movepage(p - 1)}>
+            <a className="btn btn-dark" onClick={() => movepage(p - 1)}>
               Previous
             </a>
           </li>
@@ -109,7 +116,7 @@ export default function page() {
             <a className="page-link">Current Page : {p}</a>
           </li>
           <li className="page-item">
-            <a className="page-link" onClick={() => movepage(p + 1)}>
+            <a className="btn btn-dark" onClick={() => movepage(p + 1)}>
               Next
             </a>
           </li>
@@ -134,7 +141,7 @@ export default function page() {
               />
               <div className="input-group-append">
                 <button
-                  className="btn btn-outline-secondary"
+                  className="btn btn-dark"
                   type="button"
                   onClick={() => movepage(jumpPage)}
                 >
