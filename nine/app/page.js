@@ -1,5 +1,29 @@
+"use client";
 import Navbar from "../components/navbar";
+import { MdTableRestaurant } from "react-icons/md";
+import { GrRestaurant } from "react-icons/gr";
+import { getUser } from "@/logic/user";
+
 export default function page() {
+  const homeHandler = async (path) => {
+    const token = localStorage.getItem("token");
+    if (!token) alert("please login to use features");
+    else {
+      const result = await getUser(token);
+      if (result.success) {
+        const role = result.data.role;
+        console.log(role);
+        if (role === "admin") window.location.href = path;
+        if (path === "/create/reservation" && role === "user") {
+          window.location.href = path;
+        } else {
+          alert("you do not have access to this feature");
+        }
+      } else {
+        alert("please login");
+      }
+    }
+  };
   return (
     <>
       <Navbar />
@@ -8,8 +32,22 @@ export default function page() {
           <h1 className="card-title">Nine: A Restaurant</h1>
           <h1 className="caard-title">Resevation System</h1>
           <p className="card-text">Please choose from an option below</p>
-          <a href="/create">Create New Restaurant Resevation</a>
-          <a href="/view">View My Resevation</a>
+          <div className="btn btn-secondary btn-md btn-block my-1">
+            <MdTableRestaurant className="me-2" size={30} />
+            <a onClick={() => homeHandler("/create/reservation")}>
+              Create New Restaurant Reservation
+            </a>
+          </div>
+          <div className="btn btn-light d-block">
+            <button onClick={() => homeHandler()}>View My Reservation</button>
+          </div>
+          <div className="btn btn-light d-block">
+            <GrRestaurant className="me-2" size={30} />
+            <button onClick={() => homeHandler()}>Create New Restaurant</button>
+          </div>
+          <div className="btn btn-light d-block my-1">
+            <button onClick={() => homeHandler()}>View My Restaurant</button>
+          </div>
         </div>
       </div>
     </>

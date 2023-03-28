@@ -41,4 +41,20 @@ const logout = async () => {
   localStorage.removeItem("token");
 };
 
-module.exports = { register, login, logout };
+const getUser = async (userToken) => {
+  const respone = await fetch(`${API_URL}/me`, {
+    method: "GET",
+    headers: {
+      authorization: `Bearer ${userToken}`,
+    },
+  });
+
+  const result = await respone.json();
+  if (!respone.ok) {
+    return result;
+  } else {
+    return result;
+  }
+};
+
+module.exports = { register, login, logout, getUser };
