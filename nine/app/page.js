@@ -13,7 +13,10 @@ export default function page() {
       if (result.success) {
         const role = result.data.role;
         console.log(role);
-        if (role === "admin") window.location.href = path;
+        if (role === "admin") {
+          window.location.href = path;
+          return;
+        }
         if (path === "/create/reservation" && role === "user") {
           window.location.href = path;
         } else {

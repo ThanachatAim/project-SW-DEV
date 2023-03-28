@@ -1,4 +1,5 @@
 "use client";
+import { addReservation } from "@/logic/reservation";
 import { getRestaurants } from "@/logic/restaurant";
 import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
@@ -41,16 +42,29 @@ export default function page() {
 
   // modal variable
   const [active, setActive] = useState(false);
+  const [selectData, setSelectData] = useState(null);
   const [date, setDate] = useState("");
   const handleCloseModal = () => {
     if (date !== "") {
-      console.log(date);
+      addReservation(selectData._id, date)
+        .then((result) => {
+          console.log(result);
+          if (!result.success) {
+            alert(result.message);
+          } else {
+            alert("reservation complete");
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }
     setDate("");
     setActive(false);
   };
   const handleShowModal = (value) => {
     setActive(true);
+    setSelectData(value);
     console.log(value);
   };
 
