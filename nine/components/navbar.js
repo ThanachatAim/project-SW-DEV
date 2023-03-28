@@ -5,10 +5,12 @@ import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 
 export default function navbar() {
   const [token, setToken] = useState(null);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) setToken(token);
   });
+
   return (
     <>
       <nav className="navbar navbar-expand-md bg-dark">
