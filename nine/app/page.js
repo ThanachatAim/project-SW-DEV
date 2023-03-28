@@ -39,7 +39,7 @@ export default function page() {
           <p className="card-text">Please choose from an option below</p>
           <div className="d-block">
             <div
-              className="btn btn-secondary btn-md btn-block my-1"
+              className="btn btn-outline-dark btn-md btn-block my-1"
               style={{ width: "20rem" }}
             >
               <MdTableRestaurant className="me-2" size={30} />
@@ -50,7 +50,7 @@ export default function page() {
           </div>
           <div className="d-block">
             <div
-              className="btn btn-secondary btn-md btn-block my-1"
+              className="btn btn-dark btn-md btn-block my-1"
               style={{ width: "20rem" }}
             >
               <BsCardChecklist className="me-2" size={30} />
@@ -59,7 +59,7 @@ export default function page() {
           </div>
           <div className="d-block">
             <div
-              className="btn btn-secondary btn-md btn-block my-1"
+              className="btn btn-outline-dark btn-md btn-block my-1"
               style={{ width: "20rem" }}
             >
               <BiRestaurant className="me-2" size={30} />
@@ -68,7 +68,7 @@ export default function page() {
           </div>
           <div className="d-block">
             <div
-              className="btn btn-secondary btn-md btn-block my-1"
+              className="btn btn-dark btn-md btn-block my-1"
               style={{ width: "20rem" }}
             >
               <AiFillEye className="me-2" size={30} />
