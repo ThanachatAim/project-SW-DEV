@@ -39,4 +39,44 @@ const addReservation = async (restaurantId, date) => {
   }
 };
 
-module.exports = { getReservations, addReservation };
+const updateReservation = async (restaurantId, date) => {
+  const reserveDate = new Date(date);
+  const token = localStorage.getItem("token");
+  const respone = await fetch(`${API_reservation_URL}/${restaurantId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ reserveDate }),
+  });
+  const result = await respone.json();
+  if (!respone.ok) {
+    return result;
+  } else {
+    return result;
+  }
+};
+
+const deleteReservation = async (restaurantId) => {
+  const token = localStorage.getItem("token");
+  const respone = await fetch(`${API_reservation_URL}/${restaurantId}`, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await respone.json();
+  if (!respone.ok) {
+    return result;
+  } else {
+    return result;
+  }
+};
+
+module.exports = {
+  getReservations,
+  addReservation,
+  updateReservation,
+  deleteReservation,
+};
