@@ -21,11 +21,17 @@ export default function page() {
         }
         if (path === "/create/reservation" && role === "user") {
           window.location.href = path;
+        } else if (path === "/view/reservations") {
+          window.location.href = `${path}/${role}`;
+        } else if (path === "/create/restaurant" && role === "res_owner") {
+          window.location.href = path;
+        } else if (path === "/view/restaurants" && role === "res_owner") {
+          window.location.href = path;
         } else {
           alert("you do not have access to this feature");
         }
       } else {
-        alert("please login");
+        alert("please login again");
       }
     }
   };
@@ -41,38 +47,48 @@ export default function page() {
             <div
               className="btn btn-outline-dark btn-md btn-block my-1"
               style={{ width: "20rem" }}
+              onClick={() => homeHandler("/create/reservation")}
             >
-              <MdTableRestaurant className="me-2" size={30} />
-              <a onClick={() => homeHandler("/create/reservation")}>
+              <p className="m-0">
+                <MdTableRestaurant className="me-2" size={30} />
                 Create New Restaurant Reservation
-              </a>
+              </p>
             </div>
           </div>
           <div className="d-block">
             <div
               className="btn btn-dark btn-md btn-block my-1"
               style={{ width: "20rem" }}
+              onClick={() => homeHandler("/view/reservations")}
             >
-              <BsCardChecklist className="me-2" size={30} />
-              <a onClick={() => homeHandler()}>View My Reservation</a>
+              <p className="m-0">
+                <BsCardChecklist className="me-2" size={30} />
+                View My Reservation
+              </p>
             </div>
           </div>
           <div className="d-block">
             <div
               className="btn btn-outline-dark btn-md btn-block my-1"
               style={{ width: "20rem" }}
+              onClick={() => homeHandler("/create/restaurant")}
             >
-              <BiRestaurant className="me-2" size={30} />
-              <a onClick={() => homeHandler()}>Create New Restaurant</a>
+              <p className="m-0">
+                <BiRestaurant className="me-2" size={30} />
+                Create New Restaurant
+              </p>
             </div>
           </div>
           <div className="d-block">
             <div
               className="btn btn-dark btn-md btn-block my-1"
               style={{ width: "20rem" }}
+              onClick={() => homeHandler("/view/restaurants")}
             >
-              <AiFillEye className="me-2" size={30} />
-              <a onClick={() => homeHandler()}>View My Restaurant</a>
+              <p className="m-0">
+                <AiFillEye className="me-2" size={30} />
+                View My Restaurant
+              </p>
             </div>
           </div>
         </div>

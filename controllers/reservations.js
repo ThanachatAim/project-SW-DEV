@@ -5,9 +5,40 @@ const Restaurant = require("../models/Restaurant");
 //@route GET /api/v1/reservations
 //@access Public
 exports.getReservations = async (req, res, next) => {
+  const id = req.user.id;
+  const role = req.user.role;
   try {
+    let query;
+    if (role !== "admin") {
+      if (role === "user") {
+        query = Reservation.find({
+          user: id,
+        }).populate({
+          path: "restaurant",
+          select: "name province tel",
+        });
+      } else {
+        query = Restaurant.find(
+          {
+            owner: id,
+          },
+          "name province tel"
+        )
+          .sort({ name: 1 })
+          .populate("reservations");
+      }
+    } else {
+      //If you are an admin, you can see all!
+      query = Reservation.find().populate({
+        path: "restaurant",
+        select: "name province tel",
+      });
+    }
+    const reservation = await query;
     res.status(200).json({
       success: true,
+      count: reservation.length,
+      data: reservation,
     });
   } catch (error) {
     return res
