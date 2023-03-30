@@ -16,14 +16,17 @@ const submit = async (e, userData) => {
 
 export default function page() {
   const [name, setName] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
+  const [address, setAddress] = useState("");
+  const [district, setDistrict] = useState("");
+  const [province, setProvince] = useState("");
+  const [postalcode, setPostalcode] = useState("");
+  const [tel, setTel] = useState("");
+  const [region, setRegion] = useState("");
 
   return (
     <>
       <Navbar />
-      <section className="vh-100 bg-image bg-secondary">
+      <section className="vh-150 bg-image bg-secondary">
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
@@ -36,7 +39,7 @@ export default function page() {
 
                     <form
                       onSubmit={(e) =>
-                        submit(e, { name, telephone, location, password, role })
+                        submit(e, { name, address, district, province, postalcode, tel, region})
                       }
                     >
                       <div className="form-outline mb-4">
@@ -53,12 +56,60 @@ export default function page() {
 
                       <div className="form-outline mb-4">
                         <input
+                          type="address"
+                          id="form3"
+                          className="form-control form-control-lg"
+                          onChange={(event) => setAddress(event.target.value)}
+                          value={address}
+                          required
+                        />
+                        <label className="form-label">Address</label>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input
+                          type="district"
+                          id="form3"
+                          className="form-control form-control-lg"
+                          onChange={(event) => setDistrict(event.target.value)}
+                          value={district}
+                          required
+                        />
+                        <label className="form-label">District</label>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input
+                          type="province"
+                          id="form3"
+                          className="form-control form-control-lg"
+                          onChange={(event) => setProvince(event.target.value)}
+                          value={province}
+                          required
+                        />
+                        <label className="form-label">Province</label>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input
+                          type="postalcode"
+                          id="form3"
+                          className="form-control form-control-lg"
+                          onChange={(event) => setPostalcode(event.target.value)}
+                          value={postalcode}
+                          required
+                        />
+                        <label className="form-label">Postalcode</label>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input
                           type="tel"
                           id="form2"
                           className="form-control form-control-lg"
                           placeholder="xxx-xxx-xxxx"
-                          onChange={(event) => setTelephone(event.target.value)}
-                          value={telephone}
+                          onChange={(event) => setTel(event.target.value)}
+                          value={tel}
                           required
                         />
                         <label className="form-label">Telephone</label>
@@ -66,26 +117,14 @@ export default function page() {
 
                       <div className="form-outline mb-4">
                         <input
-                          type="location"
+                          type="region"
                           id="form3"
                           className="form-control form-control-lg"
-                          onChange={(event) => setLocation(event.target.value)}
-                          value={location}
+                          onChange={(event) => setRegion(event.target.value)}
+                          value={region}
                           required
                         />
-                        <label className="form-label">Location</label>
-                      </div>
-
-                      <div className="form-outline mb-4">
-                        <input
-                          type="description"
-                          id="form3"
-                          className="form-control form-control-lg"
-                          onChange={(event) => setDescription(event.target.value)}
-                          value={description}
-                          required
-                        />
-                        <label className="form-label">Restaurant description</label>
+                        <label className="form-label">Region</label>
                       </div>
 
                       <div className="form-check d-flex justify-content-center mb-5">
