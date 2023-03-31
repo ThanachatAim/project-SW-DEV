@@ -17,4 +17,8 @@ const getRestaurants = async (page) => {
   }
 };
 
-module.exports = { getRestaurants };
+const createRestaurants = async (userData) => {
+
+}
+
+module.exports = { getRestaurants, createRestaurants };
