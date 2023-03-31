@@ -1,19 +1,27 @@
 "use client";
 import Navbar from "../../../../components/navbar";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getReservations } from "@/logic/reservation";
 
 export default function page() {
+  const [data, setData] = useState(null);
+  const [p, setP] = useState(0);
+  const [maxP, setMaxP] = useState(0);
   useEffect(() => {
     getReservations().then((result) => {
+      if (result.success) {
+        setData(result.data);
+      } else {
+        alert("please login");
+        window.location.href = "/login";
+      }
       console.log(result);
     });
   }, []);
   return (
     <>
       <Navbar />
-      <p>res_owner reservation page</p>
       <div className="container">
         <div className="my-3 p-3 bg-body rounded shadow-sm">
           <h6 className="border-bottom pb-2 mb-0">Your Reservation</h6>
