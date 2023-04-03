@@ -153,9 +153,11 @@ exports.deleteReservation = async (req, res, next) => {
       });
     }
 
+    const restaurant = await Restaurant.findById(reservation.restaurant);
     //Make sure user is the reservation owner
     if (
       reservation.user.toString() !== req.user.id &&
+      restaurant.owner.toString() !== req.user.id &&
       req.user.role !== "admin"
     ) {
       return res.status(401).json({

@@ -80,64 +80,30 @@ export default function page() {
   };
 
   const svgColor = (i) => {
+    let color = "#6f42c1";
     if (i % 3 === 1) {
-      return (
-        <svg
-          className="bd-placeholder-img flex-shrink-0 me-2 rounded my-auto"
-          width="32"
-          height="32"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Placeholder: 32x32"
-          preserveAspectRatio="xMidYMid slice"
-          focusable="false"
-        >
-          <title>Placeholder</title>
-          <rect width="100%" height="100%" fill="#007bff"></rect>
-          <text x="50%" y="50%" fill="#007bff" dy=".3em">
-            32x32
-          </text>
-        </svg>
-      );
+      color = "#007bff";
     } else if (i % 3 === 2) {
-      return (
-        <svg
-          className="bd-placeholder-img flex-shrink-0 me-2 rounded my-auto"
-          width="32"
-          height="32"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Placeholder: 32x32"
-          preserveAspectRatio="xMidYMid slice"
-          focusable="false"
-        >
-          <title>Placeholder</title>
-          <rect width="100%" height="100%" fill="#e83e8c"></rect>
-          <text x="50%" y="50%" fill="#e83e8c" dy=".3em">
-            32x32
-          </text>
-        </svg>
-      );
-    } else {
-      return (
-        <svg
-          className="bd-placeholder-img flex-shrink-0 me-2 rounded my-auto"
-          width="32"
-          height="32"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Placeholder: 32x32"
-          preserveAspectRatio="xMidYMid slice"
-          focusable="false"
-        >
-          <title>Placeholder</title>
-          <rect width="100%" height="100%" fill="#6f42c1"></rect>
-          <text x="50%" y="50%" fill="#6f42c1" dy=".3em">
-            32x32
-          </text>
-        </svg>
-      );
+      color = "#e83e8c";
     }
+    return (
+      <svg
+        className="bd-placeholder-img flex-shrink-0 me-2 rounded my-auto"
+        width="32"
+        height="32"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Placeholder: 32x32"
+        preserveAspectRatio="xMidYMid slice"
+        focusable="false"
+      >
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill={color}></rect>
+        <text x="50%" y="50%" fill={color} dy=".3em">
+          32x32
+        </text>
+      </svg>
+    );
   };
 
   return (

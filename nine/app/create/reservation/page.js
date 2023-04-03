@@ -106,16 +106,19 @@ export default function page() {
           );
         })}
       <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-end">
-          <li className="page-item">
+        <ul
+          className="pagination justify-content-end "
+          style={{ marginRight: "1cm" }}
+        >
+          <li className="page-item me-2">
             <a className="btn btn-dark" onClick={() => movepage(p - 1)}>
               Previous
             </a>
           </li>
-          <li className="page-item disabled">
+          <li className="page-item disabled me-2">
             <a className="page-link">Current Page : {p}</a>
           </li>
-          <li className="page-item">
+          <li className="page-item me-2">
             <a className="btn btn-dark" onClick={() => movepage(p + 1)}>
               Next
             </a>
