@@ -44,7 +44,7 @@ exports.getRestaurants = async (req, res, next) => {
     const limit = parseInt(req.query.limit, 10) || 5;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    
+
     const total = await Restaurant.countDocuments();
 
     query = query.skip(startIndex).limit(limit);
@@ -89,8 +89,12 @@ exports.getRestaurant = async (req, res, next) => {
 //@route POST /api/v1/restaurants
 //@access Private
 exports.createRestaurant = async (req, res, next) => {
-  const restaurant = await Restaurant.create(req.body);
-  res.status(201).json({ success: true, data: restaurant });
+  try {
+    const restaurant = await Restaurant.create(req.body);
+    res.status(201).json({ success: true, data: restaurant });
+  } catch (err) {
+    res.status(400).json({ success: false, msg: err.message });
+  }
 };
 
 //@desc Update restaurant
@@ -98,7 +102,35 @@ exports.createRestaurant = async (req, res, next) => {
 //@access Private
 exports.updateRestaurant = async (req, res, next) => {
   try {
-    res.status(200).json({ success: true });
+    const restaurant = await Restaurant.findById(req.params.id);
+
+    if (!restaurant) {
+      return res.status(400).json({
+        success: false,
+      });
+    }
+
+    if (role !== "admin" && restaurant.owner.toString() !== req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: `User ${req.user.id} is not authorized to update this restaurant`,
+      });
+    }
+
+    const new_restaurant = await Restaurant.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!new_restaurant) {
+      return res.status(400).json({ success: false });
+    }
+
+    res.status(200).json({ success: true, data: new_restaurant });
   } catch (err) {
     res.status(400).json({ success: false });
   }
@@ -108,8 +140,25 @@ exports.updateRestaurant = async (req, res, next) => {
 //@route DELETE /api/v1/restaurants/:id
 //@access Private
 exports.deleteRestaurant = async (req, res, next) => {
+  const role = req.user.role;
   try {
-    res.status(200).json({ success: true });
+    const restaurant = await Restaurant.findById(req.params.id);
+
+    if (!restaurant) {
+      return res.status(400).json({
+        success: false,
+      });
+    }
+
+    if (role !== "admin" && restaurant.owner.toString() !== req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: `User ${req.user.id} is not authorized to delete this restaurant`,
+      });
+    }
+
+    restaurant.remove();
+    res.status(200).json({ success: true, data: {} });
   } catch (err) {
     res.status(400).json({ success: false });
   }

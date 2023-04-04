@@ -9,6 +9,7 @@ const getRestaurants = async (page) => {
   const respone = await fetch(`${API_URL}?${queryParams}`, {
     method: "GET",
   });
+
   const result = await respone.json();
   if (!respone.ok) {
     return result;
@@ -17,8 +18,50 @@ const getRestaurants = async (page) => {
   }
 };
 
-const createRestaurants = async (userData) => {
+const createRestaurants = async (restaurantData) => {};
 
-}
+const updateRestaurant = async (restaurantId, restaurantData) => {
+  const token = localStorage.getItem("token");
 
-module.exports = { getRestaurants, createRestaurants };
+  const respone = await fetch(`${API_URL}/${restaurantId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(restaurantData),
+  });
+
+  const result = await respone.json();
+  if (!respone.ok) {
+    return result;
+  } else {
+    return result;
+  }
+};
+
+const deleteRestaurant = async (restaurantId) => {
+  const token = localStorage.getItem("token");
+
+  const respone = await fetch(`${API_URL}/${restaurantId}`, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await respone.json();
+
+  if (!respone.ok) {
+    return result;
+  } else {
+    return result;
+  }
+};
+
+module.exports = {
+  getRestaurants,
+  createRestaurants,
+  updateRestaurant,
+  deleteRestaurant,
+};

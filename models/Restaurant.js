@@ -34,12 +34,14 @@ const RestaurantSchema = new mongoose.Schema(
       required: [true, "Please add a region"],
     },
     open: {
-      type: Date,
+      type: String,
       required: [true, "Please add open time"],
+      match: [/^..:..$/, "Please add a valid open time"],
     },
     close: {
-      type: Date,
+      type: String,
       required: [true, "Please add close time"],
+      match: [/^..:..$/, "Please add a valid close time"],
     },
     owner: {
       type: mongoose.Schema.ObjectId,
