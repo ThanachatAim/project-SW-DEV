@@ -118,6 +118,9 @@ export default function page() {
                     postalcode : {value.postalcode} tel : {value.tel} region :{" "}
                     {value.region}
                   </p>
+                  <p className="card-text">
+                    open time : {value.open} - {value.close} 
+                  </p>
                 </div>
                 <button
                   type="button"
