@@ -61,25 +61,80 @@ export default function page() {
   const [active, setActive] = useState(false);
   const [selectData, setSelectData] = useState(null); // selected restaurantId
   // restaurant data
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [district, setDistrict] = useState("");
+  const [province, setProvince] = useState("");
+  const [postalcode, setPostalcode] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [region, setRegion] = useState("");
   const [open, setOpen] = useState("");
+  const [close, setClose] = useState("");
 
   const handleCloseModal = () => {
-    // if (haveUpdate) {
-    // updateRestaurant(selectData, {open})
-    //     .then((result) => {
-    //       console.log(result);
-    //       if (!result.success) {
-    //         alert(result.message);
-    //       } else {
-    //         alert("reservation complete");
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       alert(err);
-    //     });
-    // }
-    console.log(open);
+    let haveUpdate = false;
+    let updateField = {};
+    if (name !== "") {
+      updateField.name = name;
+      haveUpdate = true;
+    }
+    if (address !== "") {
+      updateField.address = address;
+      haveUpdate = true;
+    }
+    if (district !== "") {
+      updateField.district = district;
+      haveUpdate = true;
+    }
+    if (province !== "") {
+      updateField.province = province;
+      haveUpdate = true;
+    }
+    if (postalcode !== "") {
+      updateField.postalcode = postalcode;
+      haveUpdate = true;
+    }
+    if (telephone !== "") {
+      updateField.telephone = telephone;
+      haveUpdate = true;
+    }
+    if (region !== "") {
+      updateField.region = region;
+      haveUpdate = true;
+    }
+    if (open !== "") {
+      updateField.open = open;
+      haveUpdate = true;
+    }
+    if (close !== "") {
+      updateField.close = close;
+      haveUpdate = true;
+    }
+    if (haveUpdate) {
+      updateRestaurant(selectData, updateField)
+        .then((result) => {
+          console.log(result);
+          if (!result.success) {
+            alert(result.message);
+          } else {
+            alert("update restaurant complete");
+            setIsnewPage(true);
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+    console.log(typeof open);
+    setName("");
+    setAddress("");
+    setDistrict("");
+    setProvince("");
+    setPostalcode("");
+    setTelephone("");
+    setRegion("");
     setOpen("");
+    setClose("");
     setActive(false);
   };
 
@@ -119,7 +174,7 @@ export default function page() {
                     {value.region}
                   </p>
                   <p className="card-text">
-                    open time : {value.open} - {value.close} 
+                    open time : {value.open} - {value.close}
                   </p>
                 </div>
                 <button
@@ -142,7 +197,7 @@ export default function page() {
             </div>
           );
         })}
-      <nav aria-label="Page navigation example">
+      <nav className="my-2" aria-label="Page navigation example">
         <ul
           className="pagination justify-content-end "
           style={{ marginRight: "1cm" }}
@@ -204,13 +259,85 @@ export default function page() {
             style={{ flex: 1, paddingLeft: "10px" }}
           >
             <div className="form-group">
-              <label className="my-1">Open Time</label>
+              <label className="form-label my-1">Restaurant name</label>
+              <input
+                type="text"
+                id="form1"
+                className="form-control form-control-lg"
+                onChange={(event) => setName(event.target.value)}
+                value={name}
+                required
+              />
+              <label className="form-label my-1">Address</label>
+              <input
+                type="address"
+                id="form2"
+                className="form-control form-control-lg"
+                onChange={(event) => setAddress(event.target.value)}
+                value={address}
+                required
+              />
+              <label className="form-label my-1">District</label>
+              <input
+                type="district"
+                id="form3"
+                className="form-control form-control-lg"
+                onChange={(event) => setDistrict(event.target.value)}
+                value={district}
+                required
+              />
+              <label className="form-label my-1">Province</label>
+              <input
+                type="province"
+                id="form4"
+                className="form-control form-control-lg"
+                onChange={(event) => setProvince(event.target.value)}
+                value={province}
+                required
+              />
+              <label className="form-label my-1">Postalcode</label>
+              <input
+                type="postalcode"
+                id="form5"
+                className="form-control form-control-lg"
+                onChange={(event) => setPostalcode(event.target.value)}
+                value={postalcode}
+                required
+              />
+              <label className="form-label my-1">Telephone</label>
+              <input
+                type="tel"
+                id="form6"
+                className="form-control form-control-lg"
+                placeholder="xxx-xxx-xxxx"
+                onChange={(event) => setTelephone(event.target.value)}
+                value={telephone}
+                required
+              />
+              <label className="form-label my-1">Region</label>
+              <input
+                type="region"
+                id="form7"
+                className="form-control form-control-lg"
+                onChange={(event) => setRegion(event.target.value)}
+                value={region}
+                required
+              />
+              <label className="form-label my-1">Open Time</label>
               <input
                 type="time"
                 className="form-control"
-                id="Inputdate"
+                id="Inputdate1"
                 onChange={(event) => setOpen(event.target.value)}
                 value={open}
+              />
+              <label className="form-label my-1">Close time</label>
+              <input
+                type="time"
+                className="form-control"
+                id="Inputdate2"
+                onChange={(event) => setClose(event.target.value)}
+                value={close}
               />
             </div>
             <button
@@ -219,7 +346,7 @@ export default function page() {
                 handleCloseModal();
               }}
             >
-              submit
+              Submit
             </button>
           </div>
         </Modal.Body>

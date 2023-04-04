@@ -172,6 +172,7 @@ exports.updateRestaurant = async (req, res, next) => {
       });
     }
 
+    const role = req.user.role;
     if (role !== "admin" && restaurant.owner.toString() !== req.user.id) {
       return res.status(401).json({
         success: false,
@@ -194,7 +195,7 @@ exports.updateRestaurant = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: new_restaurant });
   } catch (err) {
-    res.status(400).json({ success: false });
+    res.status(400).json({ success: false, msg: err });
   }
 };
 

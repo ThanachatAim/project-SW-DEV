@@ -185,7 +185,7 @@ export default function page() {
                 handleCloseModal();
               }}
             >
-              submit
+              Submit
             </button>
           </div>
         </Modal.Body>

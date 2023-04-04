@@ -169,7 +169,7 @@ export default function page() {
                           type="submit"
                           className="btn btn-dark btn-block btn-lg gradient-custom-4"
                         >
-                          Create restaurant
+                          Create Restaurant
                         </button>
                       </div>
                     </form>
