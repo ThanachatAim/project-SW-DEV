@@ -2,7 +2,7 @@
 import { addReservation } from "@/logic/reservation";
 import {
   deleteRestaurant,
-  getRestaurants,
+  getOwnerRestaurants,
   updateRestaurant,
 } from "@/logic/restaurant";
 import { useEffect, useState } from "react";
@@ -29,7 +29,7 @@ export default function page() {
 
   useEffect(() => {
     if (isnewPage) {
-      getRestaurants(p).then((result) => {
+      getOwnerRestaurants(p).then((result) => {
         setData(result.data);
       });
     }

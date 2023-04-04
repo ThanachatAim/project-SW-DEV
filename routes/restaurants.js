@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   getRestaurants,
+  getOwnerRestaurants,
   getRestaurant,
   createRestaurant,
   updateRestaurant,
@@ -21,6 +22,11 @@ router
   .route("/")
   .get(getRestaurants)
   .post(protect, authorize("admin", "res_owner"), createRestaurant);
+
+router
+  .route("/owner")
+  .get(protect, authorize("admin", "res_owner"), getOwnerRestaurants);
+
 router
   .route("/:id")
   .get(getRestaurant)

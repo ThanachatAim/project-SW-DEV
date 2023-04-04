@@ -18,6 +18,28 @@ const getRestaurants = async (page) => {
   }
 };
 
+const getOwnerRestaurants = async (page) => {
+  const token = localStorage.getItem("token");
+
+  const queryParams = new URLSearchParams({
+    page,
+  }).toString();
+
+  const respone = await fetch(`${API_URL}/owner?${queryParams}`, {
+    method: "GET",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await respone.json();
+  if (!respone.ok) {
+    return result;
+  } else {
+    return result;
+  }
+};
+
 const createRestaurants = async (restaurantData) => {
   const token = localStorage.getItem("token");
 
@@ -79,6 +101,7 @@ const deleteRestaurant = async (restaurantId) => {
 
 module.exports = {
   getRestaurants,
+  getOwnerRestaurants,
   createRestaurants,
   updateRestaurant,
   deleteRestaurant,
