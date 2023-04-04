@@ -3,9 +3,10 @@ import { createRestaurants } from "@/logic/restaurant";
 import { useState } from "react";
 import Navbar from "../../../components/navbar";
 
-const submit = async (e, userData) => {
+const submit = async (e, restaurantData) => {
   e.preventDefault();
-  const result = await createRestaurants(userData);
+  const result = await createRestaurants(restaurantData);
+  console.log(restaurantData);
   if (result.success) {
     alert("restaurant was created");
     window.location.href = "/";
@@ -20,8 +21,10 @@ export default function page() {
   const [district, setDistrict] = useState("");
   const [province, setProvince] = useState("");
   const [postalcode, setPostalcode] = useState("");
-  const [tel, setTel] = useState("");
+  const [telephone, setTelephone] = useState("");
   const [region, setRegion] = useState("");
+  const [open, setOpen] = useState("");
+  const [close, setClose] = useState("");
 
   return (
     <>
@@ -39,7 +42,17 @@ export default function page() {
 
                     <form
                       onSubmit={(e) =>
-                        submit(e, { name, address, district, province, postalcode, tel, region})
+                        submit(e, {
+                          name,
+                          address,
+                          district,
+                          province,
+                          postalcode,
+                          telephone,
+                          region,
+                          open,
+                          close,
+                        })
                       }
                     >
                       <div className="form-outline mb-4">
@@ -95,7 +108,9 @@ export default function page() {
                           type="postalcode"
                           id="form3"
                           className="form-control form-control-lg"
-                          onChange={(event) => setPostalcode(event.target.value)}
+                          onChange={(event) =>
+                            setPostalcode(event.target.value)
+                          }
                           value={postalcode}
                           required
                         />
@@ -108,8 +123,8 @@ export default function page() {
                           id="form2"
                           className="form-control form-control-lg"
                           placeholder="xxx-xxx-xxxx"
-                          onChange={(event) => setTel(event.target.value)}
-                          value={tel}
+                          onChange={(event) => setTelephone(event.target.value)}
+                          value={telephone}
                           required
                         />
                         <label className="form-label">Telephone</label>
@@ -127,19 +142,26 @@ export default function page() {
                         <label className="form-label">Region</label>
                       </div>
 
-                      <div className="form-check d-flex justify-content-center mb-5">
+                      <div className="form-outline mb-4">
                         <input
-                          className="form-check-input me-2"
-                          type="checkbox"
-                          value=""
-                          id="form2Example3cg"
+                          type="time"
+                          className="form-control"
+                          id="Inputdate"
+                          onChange={(event) => setOpen(event.target.value)}
+                          value={open}
                         />
-                        <label className="form-check-label">
-                          I agree all statements in{" "}
-                          <a href="#!" className="text-body">
-                            <u>Terms of service</u>
-                          </a>
-                        </label>
+                        <label className="form-label">Open time</label>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input
+                          type="time"
+                          className="form-control"
+                          id="Inputdate"
+                          onChange={(event) => setClose(event.target.value)}
+                          value={close}
+                        />
+                        <label className="form-label">Close time</label>
                       </div>
 
                       <div className="d-flex justify-content-center">

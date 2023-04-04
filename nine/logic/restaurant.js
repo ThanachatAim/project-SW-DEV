@@ -18,7 +18,25 @@ const getRestaurants = async (page) => {
   }
 };
 
-const createRestaurants = async (restaurantData) => {};
+const createRestaurants = async (restaurantData) => {
+  const token = localStorage.getItem("token");
+
+  const respone = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(restaurantData),
+  });
+
+  const result = await respone.json();
+  if (!respone.ok) {
+    return result;
+  } else {
+    return result;
+  }
+};
 
 const updateRestaurant = async (restaurantId, restaurantData) => {
   const token = localStorage.getItem("token");
