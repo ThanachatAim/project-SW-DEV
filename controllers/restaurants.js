@@ -25,6 +25,7 @@ exports.getRestaurants = async (req, res, next) => {
       (match) => `$${match}`
     );
     //finding resource
+    console.log(queryStr)
     query = Restaurant.find(JSON.parse(queryStr)).populate("reservations");
 
     //Select Fields
@@ -91,14 +92,16 @@ exports.getRestaurant = async (req, res, next) => {
 exports.createRestaurant = async (req, res, next) => {
   try {
     const role = req.user.role;
-    if(role !== "admin" && role !== "owner"){
+    if (role !== "admin" && role !== "res_owner") {
       return res.status(401).json({
         success: false,
         message: `User ${req.user.id} is not authorized to create a restaurant`,
       });
     }
-    const restaurant = await Restaurant.create({...req.body, "owner" : req.user.id});
-    console.log(req.user.id);
+    const restaurant = await Restaurant.create({
+      ...req.body,
+      owner: req.user.id,
+    });
     res.status(201).json({ success: true, data: restaurant });
   } catch (err) {
     res.status(400).json({ success: false, msg: err.message });
