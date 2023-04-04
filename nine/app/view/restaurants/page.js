@@ -165,15 +165,15 @@ export default function page() {
               </h5>
               <div className="d-flex justify-content-end">
                 <div className="card-body py-2 " style={{ maxWidth: "85%" }}>
-                  <p className="card-text">
+                  <p className="card-text my-0">
                     address : {value.address} district : {value.district}{" "}
                     province : {value.province}
                   </p>
-                  <p className="card-text">
-                    postalcode : {value.postalcode} tel : {value.tel} region :{" "}
+                  <p className="card-text my-0">
+                    postalcode : {value.postalcode} tel : {value.telephone} region :{" "}
                     {value.region}
                   </p>
-                  <p className="card-text">
+                  <p className="card-text my-0">
                     open time : {value.open} - {value.close}
                   </p>
                 </div>
