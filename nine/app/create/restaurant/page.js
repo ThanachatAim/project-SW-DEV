@@ -21,7 +21,7 @@ export default function page() {
   const [district, setDistrict] = useState("");
   const [province, setProvince] = useState("");
   const [postalcode, setPostalcode] = useState("");
-  const [telephone, setTelephone] = useState("");
+  const [tel, setTelephone] = useState("");
   const [region, setRegion] = useState("");
   const [open, setOpen] = useState("");
   const [close, setClose] = useState("");
@@ -48,14 +48,14 @@ export default function page() {
                           district,
                           province,
                           postalcode,
-                          telephone,
+                          tel,
                           region,
                           open,
                           close,
                         })
                       }
                     >
-                      <div className="form-outline mb-0">
+                      <div className="form-outline mb-2">
                         <input
                           type="text"
                           id="form1"
@@ -67,7 +67,7 @@ export default function page() {
                         <label className="form-label">Restaurant name</label>
                       </div>
 
-                      <div className="form-outline mb-0">
+                      <div className="form-outline mb-2">
                         <input
                           type="address"
                           id="form2"
@@ -79,7 +79,7 @@ export default function page() {
                         <label className="form-label">Address</label>
                       </div>
 
-                      <div className="form-outline mb-0">
+                      <div className="form-outline mb-2">
                         <input
                           type="district"
                           id="form3"
@@ -91,7 +91,7 @@ export default function page() {
                         <label className="form-label">District</label>
                       </div>
 
-                      <div className="form-outline mb-0">
+                      <div className="form-outline mb-2">
                         <input
                           type="province"
                           id="form4"
@@ -103,7 +103,7 @@ export default function page() {
                         <label className="form-label">Province</label>
                       </div>
 
-                      <div className="form-outline mb-0">
+                      <div className="form-outline mb-2">
                         <input
                           type="postalcode"
                           id="form5"
@@ -117,20 +117,20 @@ export default function page() {
                         <label className="form-label">Postalcode</label>
                       </div>
 
-                      <div className="form-outline mb-0">
+                      <div className="form-outline mb-2">
                         <input
                           type="tel"
                           id="form6"
                           className="form-control form-control-lg"
                           placeholder="xxx-xxx-xxxx"
                           onChange={(event) => setTelephone(event.target.value)}
-                          value={telephone}
+                          value={tel}
                           required
                         />
                         <label className="form-label">Telephone</label>
                       </div>
 
-                      <div className="form-outline mb-0">
+                      <div className="form-outline mb-2">
                         <input
                           type="region"
                           id="form7"
@@ -142,7 +142,7 @@ export default function page() {
                         <label className="form-label">Region</label>
                       </div>
 
-                      <div className="form-outline mb-0">
+                      <div className="form-outline mb-2">
                         <input
                           type="time"
                           className="form-control"
@@ -153,7 +153,7 @@ export default function page() {
                         <label className="form-label">Open time</label>
                       </div>
 
-                      <div className="form-outline mb-0">
+                      <div className="form-outline mb-2">
                         <input
                           type="time"
                           className="form-control"

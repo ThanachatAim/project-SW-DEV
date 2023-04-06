@@ -90,7 +90,7 @@ export default function page() {
                   : {value.province}
                 </p>
                 <p className="card-text my-0">
-                  postalcode : {value.postalcode} tel : {value.telephone} region :{" "}
+                  postalcode : {value.postalcode} tel : {value.tel} region :{" "}
                   {value.region}
                 </p>
                 <p className="card-text my-0">
