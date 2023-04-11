@@ -52,13 +52,22 @@ exports.getReservations = async (req, res, next) => {
 //@access Public
 exports.getReservation = async (req, res, next) => {
   try {
-    res.status(200).json({ success: true });
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation) {
+      return res.status(400).json({ success: false });
+    }
+
+    res.status(200).json({ success: true, data: reservation });
+
   } catch (error) {
     console.log(error);
     return res
       .status(500)
       .json({ success: false, message: "Cannot find Reservation" });
   }
+  res
+    .status(200)
+    .json({ success: true, msg: `Show reservation ${req.params.id}` });
 };
 
 //@desc Add reservation
