@@ -52,22 +52,26 @@ exports.getReservations = async (req, res, next) => {
 //@access Public
 exports.getReservation = async (req, res, next) => {
   try {
-    const reservation = await Reservation.findById(req.params.id);
+    const reservation = await Reservation.findById(req.params.id).populate({
+      path: "restaurant",
+      select: "name province tel",
+    });
     if (!reservation) {
-      return res.status(400).json({ success: false });
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: `No reservation with the id of ${req.params.id}`,
+        });
     }
 
     res.status(200).json({ success: true, data: reservation });
-
   } catch (error) {
     console.log(error);
     return res
       .status(500)
       .json({ success: false, message: "Cannot find Reservation" });
   }
-  res
-    .status(200)
-    .json({ success: true, msg: `Show reservation ${req.params.id}` });
 };
 
 //@desc Add reservation
