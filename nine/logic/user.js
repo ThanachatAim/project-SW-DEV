@@ -38,7 +38,22 @@ const login = async (userData) => {
 };
 
 const logout = async () => {
-  localStorage.removeItem("token");
+  const userToken = localStorage.getItem("token")
+  const respone = await fetch(`${API_URL}/logout`, {
+    method: "GET",
+    headers: {
+      authorization: `Bearer ${userToken}`,
+    },
+  });
+
+  const result = await respone.json();
+
+  if (!respone.ok) {
+    return result;
+  } else {
+    localStorage.removeItem("token");
+    return result;
+  }
 };
 
 const getUser = async (userToken) => {
