@@ -66,7 +66,7 @@ export default function page() {
   const [district, setDistrict] = useState("");
   const [province, setProvince] = useState("");
   const [postalcode, setPostalcode] = useState("");
-  const [telephone, setTelephone] = useState("");
+  const [tel, setTelephone] = useState("");
   const [region, setRegion] = useState("");
   const [open, setOpen] = useState("");
   const [close, setClose] = useState("");
@@ -94,8 +94,8 @@ export default function page() {
       updateField.postalcode = postalcode;
       haveUpdate = true;
     }
-    if (telephone !== "") {
-      updateField.telephone = telephone;
+    if (tel !== "") {
+      updateField.tel = tel;
       haveUpdate = true;
     }
     if (region !== "") {
@@ -165,15 +165,15 @@ export default function page() {
               </h5>
               <div className="d-flex justify-content-end">
                 <div className="card-body py-2 " style={{ maxWidth: "85%" }}>
-                  <p className="card-text">
+                  <p className="card-text my-0">
                     address : {value.address} district : {value.district}{" "}
                     province : {value.province}
                   </p>
-                  <p className="card-text">
+                  <p className="card-text my-0">
                     postalcode : {value.postalcode} tel : {value.tel} region :{" "}
                     {value.region}
                   </p>
-                  <p className="card-text">
+                  <p className="card-text my-0">
                     open time : {value.open} - {value.close}
                   </p>
                 </div>
@@ -311,7 +311,7 @@ export default function page() {
                 className="form-control form-control-lg"
                 placeholder="xxx-xxx-xxxx"
                 onChange={(event) => setTelephone(event.target.value)}
-                value={telephone}
+                value={tel}
                 required
               />
               <label className="form-label my-1">Region</label>

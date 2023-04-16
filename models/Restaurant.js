@@ -26,7 +26,7 @@ const RestaurantSchema = new mongoose.Schema(
       required: [true, "Please add a postalcode"],
       maxlength: [5, "Postal Code can not be more than 5 digits"],
     },
-    telephone: {
+    tel: {
       type: String,
       required: [true, "Please add a telephone number"],
       match: [
