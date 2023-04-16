@@ -57,12 +57,10 @@ exports.getReservation = async (req, res, next) => {
       select: "name province tel",
     });
     if (!reservation) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: `No reservation with the id of ${req.params.id}`,
-        });
+      return res.status(400).json({
+        success: false,
+        message: `No reservation with the id of ${req.params.id}`,
+      });
     }
 
     res.status(200).json({ success: true, data: reservation });
@@ -93,22 +91,48 @@ exports.addReservation = async (req, res, next) => {
     //add user Id to req.body
     req.body.user = req.user.id;
 
-    //Check for existed appointment
-    const existedReservations = await Reservation.find({ user: req.user.id });
-
-    //If the user is not an admin, they can only create 3 appointment.
-    if (existedReservations.length >= 3 && req.user.role !== "admin") {
+    //keep table value
+    const table = req.body.table;
+    if (!table) {
+      throw "table is required";
+    }
+    if (table < 1 || table > 3) {
       return res.status(400).json({
         success: false,
-        message: `The user with ID ${req.user.id} has already made 3 reservations`,
+        message: `The table number is invalid`,
       });
+    }
+    delete req.body.table;
+
+    //Check for existed reservation
+    const existedReservations = await Reservation.findOne(req.body);
+
+    //If the user is not an admin, they can only reserve up to 3 tables.
+    if (existedReservations) {
+      console.log(existedReservations.table + table);
+      if (existedReservations.table + table > 3 && req.user.role !== "admin") {
+        return res.status(400).json({
+          success: false,
+          message: `The reservation make reserved table more than 3`,
+        });
+      }
+      const reservation = await Reservation.findByIdAndUpdate(
+        existedReservations._id,
+        { table: existedReservations.table + table },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      return res.status(200).json({ success: true, data: reservation });
+    } else {
+      req.body.table = table;
     }
 
     const reservation = await Reservation.create(req.body);
 
-    res.status(200).json({ success: true, data: reservation });
+    return res.status(200).json({ success: true, data: reservation });
   } catch (error) {
-    console.log(error);
     return res
       .status(500)
       .json({ success: false, message: "Cannot create Reservation" });
@@ -139,12 +163,21 @@ exports.updateReservation = async (req, res, next) => {
       });
     }
 
+    if (req.body.table) {
+      if (req.body.table < 1 || req.body.table > 3) {
+        return res.status(400).json({
+          success: false,
+          message: `The table number is invalid`,
+        });
+      }
+    }
+    console.log(req.body);
     reservation = await Reservation.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
 
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, data: reservation });
   } catch (error) {
     console.log(error);
     return res

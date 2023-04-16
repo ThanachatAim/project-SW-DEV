@@ -15,6 +15,11 @@ const ReservationSchema = new mongoose.Schema({
     ref: "Restaurant",
     required: true,
   },
+  table: {
+    type: Number,
+    min: 1,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

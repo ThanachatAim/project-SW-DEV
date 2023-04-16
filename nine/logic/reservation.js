@@ -17,7 +17,7 @@ const getReservations = async () => {
   }
 };
 
-const addReservation = async (restaurantId, date) => {
+const addReservation = async (restaurantId, date, table) => {
   const reserveDate = new Date(date);
   const token = localStorage.getItem("token");
   const respone = await fetch(
@@ -28,7 +28,7 @@ const addReservation = async (restaurantId, date) => {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ reserveDate }),
+      body: JSON.stringify({ reserveDate, table }),
     }
   );
   const result = await respone.json();
@@ -39,8 +39,14 @@ const addReservation = async (restaurantId, date) => {
   }
 };
 
-const updateReservation = async (restaurantId, date) => {
-  const reserveDate = new Date(date);
+const updateReservation = async (restaurantId, date, table) => {
+  let value = {};
+  if (date !== "") {
+    value.reserveDate = new Date(date);
+  }
+  if (!isNaN(table)) {
+    value.table = table;
+  }
   const token = localStorage.getItem("token");
   const respone = await fetch(`${API_reservation_URL}/${restaurantId}`, {
     method: "PUT",
@@ -48,7 +54,7 @@ const updateReservation = async (restaurantId, date) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ reserveDate }),
+    body: JSON.stringify(value),
   });
   const result = await respone.json();
   if (!respone.ok) {

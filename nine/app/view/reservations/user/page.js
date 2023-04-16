@@ -52,10 +52,11 @@ export default function page() {
   // modal variable
   const [active, setActive] = useState(false);
   const [date, setDate] = useState("");
+  const [table, setTable] = useState("");
   const [reservationId, setReservationId] = useState(null);
   const handleCloseModal = () => {
-    if (date !== "") {
-      updateReservation(reservationId, date)
+    if (date !== "" || table !== "") {
+      updateReservation(reservationId, date, parseInt(table))
         .then((result) => {
           if (result.success) {
             setUpdate(true);
@@ -66,6 +67,7 @@ export default function page() {
         .catch((err) => console.log(err));
     }
     setDate("");
+    setTable("");
     setActive(false);
   };
 
@@ -120,16 +122,19 @@ export default function page() {
               const res_month = date.getMonth() + 1;
               const res_year = date.getFullYear();
               const restaurant = reservation.restaurant;
+              const tables = reservation.table;
               return (
                 <div key={`res#${i}`} className="d-flex text-muted pt-3">
                   {svgColor(i)}
                   <p className="pb-2 mb-0 small lh-sm border-bottom ">
                     <strong className="d-block text-gray-dark mb-1">
-                      {restaurant.name} @ {res_date}/{res_month}/{res_year}
+                      {restaurant.name} tables : {tables} @ {res_date}/
+                      {res_month}/{res_year}
                     </strong>
-                    <MdLocationCity className="ms-2" size={18} /> :{" "}
-                    {restaurant.province}{" "}
-                    <BsFillTelephoneFill className="ms-2" /> : {restaurant.tel}
+                    <MdLocationCity className="ms-2" size={18} />
+                    {` : ${restaurant.province} `}
+                    <BsFillTelephoneFill className="ms-2" />
+                    {` : ${restaurant.tel} `}
                   </p>
                   <button
                     type="button"
@@ -180,6 +185,14 @@ export default function page() {
                 id="Inputdate"
                 onChange={(event) => setDate(event.target.value)}
                 value={date}
+              />
+              <label className="my-1">Tables</label>
+              <input
+                type="number"
+                className="form-control"
+                id="Inputtable"
+                onChange={(event) => setTable(event.target.value)}
+                value={table}
               />
             </div>
             <button

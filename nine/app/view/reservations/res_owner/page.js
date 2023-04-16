@@ -127,8 +127,8 @@ export default function page() {
                   {svgColor(i)}
                   <p className="py-2 mb-0 small lh-sm border-bottom ">
                     <strong className="d-block text-gray-dark mb-1">
-                      User : {reservation.user} @ {res_date}/{res_month}/
-                      {res_year}
+                      User : {reservation.user} tables : {reservation.table} @{" "}
+                      {res_date}/{res_month}/{res_year}
                     </strong>
                   </p>
                   <button

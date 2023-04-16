@@ -45,9 +45,10 @@ export default function page() {
   const [active, setActive] = useState(false);
   const [selectData, setSelectData] = useState(null);
   const [date, setDate] = useState("");
+  const [table, setTable] = useState("");
   const handleCloseModal = () => {
-    if (date !== "") {
-      addReservation(selectData._id, date)
+    if (date !== "" && table !== "") {
+      addReservation(selectData._id, date, parseInt(table))
         .then((result) => {
           console.log(result);
           if (!result.success) {
@@ -61,6 +62,7 @@ export default function page() {
         });
     }
     setDate("");
+    setTable("");
     setActive(false);
   };
   const handleShowModal = (value) => {
@@ -84,27 +86,25 @@ export default function page() {
                 <IoRestaurantOutline className="me-2" size={15} />
                 {value.name}
               </h5>
-              <div className="card-body pt-2 pb-0">
+              <div className="card-body d-flex pt-2 pb-0 align-items-center">
                 <p className="card-text my-0">
-                  address : {value.address} district : {value.district} province
-                  : {value.province}
+                  {`address : ${value.address}    district : ${value.district}    province
+                  : ${value.province}`}
+                  <br />
+                  {`postalcode : ${value.postalcode}    tel : ${value.tel}    region :
+                  ${value.region}`}
+                  <br />
+                  {`open time : ${value.open || "  "} - ${value.close || "  "}`}
                 </p>
-                <p className="card-text my-0">
-                  postalcode : {value.postalcode} tel : {value.tel} region :{" "}
-                  {value.region}
-                </p>
-                <p className="card-text my-0">
-                  open time : {value.open} - {value.close} 
-                </p>
+                <button
+                  type="button"
+                  className="btn btn-dark ms-auto"
+                  style={{ maxHeight: "10em" }}
+                  onClick={() => handleShowModal({ ...value })}
+                >
+                  Reserve
+                </button>
               </div>
-              <button
-                type="button"
-                className="btn btn-dark my-1 ms-auto me-1"
-                style={{ width: "7rem" }}
-                onClick={() => handleShowModal({ ...value })}
-              >
-                Reserve
-              </button>
             </div>
           );
         })}
@@ -177,6 +177,14 @@ export default function page() {
                 id="Inputdate"
                 onChange={(event) => setDate(event.target.value)}
                 value={date}
+              />
+              <label className="my-1">Tables</label>
+              <input
+                type="number"
+                className="form-control"
+                id="Inputtable"
+                onChange={(event) => setTable(event.target.value)}
+                value={table}
               />
             </div>
             <button
